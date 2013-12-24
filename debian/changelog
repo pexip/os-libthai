@@ -1,3 +1,9 @@
+libthai (0.1.16-3pexip1) pexip; urgency=low
+
+  * Prepare Pexip packaging
+
+ -- John-Mark Bell <jmb@pexip.com>  Tue, 24 Dec 2013 22:02:15 +0000
+
 libthai (0.1.16-3) unstable; urgency=low
 
   * Set Vcs-Git and Vcs-Browser to alioth

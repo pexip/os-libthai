@@ -1,8 +1,9 @@
 Source: libthai
 Priority: optional
 Section: libs
-Maintainer: Theppitak Karoonboonyanan <thep@debian.org>
-Uploaders: Loic Minier <lool@dooz.org>
+Maintainer: Pexip AS <packaging@pexip.com>
+XSBC-Pexip-Original-Maintainer: Theppitak Karoonboonyanan <thep@debian.org>
+XSBC-Pexip-Original-Uploaders: Loic Minier <lool@dooz.org>
 Build-Depends:
  debhelper (>= 8.1.3),
  dh-autoreconf,
@@ -14,6 +15,7 @@ Standards-Version: 3.9.2
 Vcs-Git: git://git.debian.org/git/collab-maint/libthai.git
 Vcs-Browser: http://anonscm.debian.org/gitweb/?p=collab-maint/libthai.git
 Homepage: http://linux.thai.net/projects/libthai
+XS-Pexip-Upstream: http://archive.ubuntu.com/ubuntu/ precise
 
 Package: libthai-dev
 Section: libdevel
