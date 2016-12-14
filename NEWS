@@ -2,6 +2,36 @@
 RELEASES INFORMATION
 =======================================================================
 
+LibThai 0.1.26 (14 Dec 2016):
+* Updated word break dictionary.
+
+LibThai 0.1.25 (28 Jun 2016):
+* New word break APIs for more thread-safety.
+* Fix compilation error and warning with GCC 6.
+* Do not test word breaking if dictionary is disabled.
+* Updated word break dictionary.
+
+LibThai 0.1.24 (22 Nov 2015):
+* Fix infinite loop caused by optimization in previous version.
+  (Thanks Zack Weinberg for the report via Debian #805703
+  http://bugs.debian.org/805703)
+* Updated word break dictionary.
+
+LibThai 0.1.23 (22 Oct 2015):
+* Correctly check doxygen version on configure.
+  (Change adapted from Petr Gajdos' proposed patch to libdatrie.)
+* Threadsafe word breaking.
+  (Thanks Behdad Esfahbod for the report.)
+* Improve word breaking performance by 0.1%
+  (About 0.28% when used with libdatrie 0.2.10)
+* Updated word break dictionary.
+
+LibThai 0.1.22 (8 May 2015):
+* Updated word break dictionary.
+* Improve word breaking performance by 0.38%
+* No timestamp on Doxygen-generated doc
+  (Thanks Debian Reproducible)
+
 LibThai 0.1.21 (21 August 2014):
 * Updated word break dictionary.
 * Improve word breaking performance by 8.61%

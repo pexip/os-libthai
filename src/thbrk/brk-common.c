@@ -1,7 +1,7 @@
 /* -*- Mode: C; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- */
 /*
  * libthai - Thai Language Support Library
- * Copyright (C) 2001  Theppitak Karoonboonyanan <thep@linux.thai.net>
+ * Copyright (C) 2001  Theppitak Karoonboonyanan <theppitak@gmail.com>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -21,7 +21,7 @@
 /*
  * brk-common.c - Common code for word break backends
  * Created: 2014-08-03
- * Author:  Theppitak Karoonboonyanan <thep@linux.thai.net>
+ * Author:  Theppitak Karoonboonyanan <theppitak@gmail.com>
  */
 
 #include <stdio.h>
@@ -30,56 +30,31 @@
 #include <datrie/trie.h>
 #include <thai/tis.h>
 #include <thai/thctype.h>
+#include "thbrk-utils.h"
 #include "brk-common.h"
 
 #define DICT_NAME   "thbrk"
 
-static Trie *brk_dict = 0;
-
-void
-brk_on_unload ()
-{
-    if (brk_dict) {
-        trie_free (brk_dict);
-    }
-}
-
 Trie *
-brk_get_dict ()
+brk_load_default_dict ()
 {
-    static int is_dict_tried = 0;
+    const char *dict_dir;
+    char        path[512];
+    Trie *      dict_trie = NULL;
 
-    if (!brk_dict && !is_dict_tried) {
-        const char *dict_dir;
-        char        path[512];
-
-        /* Try LIBTHAI_DICTDIR env first */
-        if (NULL != (dict_dir = getenv ("LIBTHAI_DICTDIR"))) {
-            snprintf (path, sizeof path, "%s/%s.tri", dict_dir, DICT_NAME);
-            brk_dict = trie_new_from_file (path);
-        }
-
-        /* Then, fall back to default DICT_DIR macro */
-        if (!brk_dict) {
-            brk_dict = trie_new_from_file (DICT_DIR "/" DICT_NAME ".tri");
-        }
-
-        if (!brk_dict) {
-            if (dict_dir) {
-                fprintf (stderr,
-                         "LibThai: Fail to open dictionary at '%s' and '%s'.\n",
-                         path, DICT_DIR "/" DICT_NAME ".tri");
-            } else {
-                fprintf (stderr,
-                         "LibThai: Fail to open dictionary at '%s'.\n",
-                         DICT_DIR "/" DICT_NAME ".tri");
-            }
-        }
-
-        is_dict_tried = 1;
+    /* Try LIBTHAI_DICTDIR env first */
+    dict_dir = getenv ("LIBTHAI_DICTDIR");
+    if (dict_dir) {
+        snprintf (path, sizeof path, "%s/%s.tri", dict_dir, DICT_NAME);
+        dict_trie = trie_new_from_file (path);
     }
 
-    return brk_dict;
+    /* Then, fall back to default DICT_DIR macro */
+    if (!dict_trie) {
+        dict_trie = trie_new_from_file (DICT_DIR "/" DICT_NAME ".tri");
+    }
+
+    return dict_trie;
 }
 
 void

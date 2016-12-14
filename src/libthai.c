@@ -1,7 +1,7 @@
 /* -*- Mode: C; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- */
 /*
  * libthai - Thai Language Support Library
- * Copyright (C) 2001  Theppitak Karoonboonyanan <thep@linux.thai.net>
+ * Copyright (C) 2001  Theppitak Karoonboonyanan <theppitak@gmail.com>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -21,7 +21,7 @@
 /*
  * libthai.c - main source for libthai
  * Created: 2008-12-23
- * Author:  Theppitak Karoonboonyanan <thep@linux.thai.net>
+ * Author:  Theppitak Karoonboonyanan <theppitak@gmail.com>
  */
 
 /**
@@ -55,6 +55,9 @@
  *
  * @subsection ThBrk Functions for word segmentation
  *
+ * th_brk_new(), th_brk_delete(),
+ * th_brk_find_breaks(), th_brk_insert_breaks(),
+ * th_brk_wc_find_breaks(), th_brk_wc_insert_breaks(),
  * th_brk(), th_brk_line(), th_wbrk(), th_wbrk_line()
  *
  * @subsection ThColl Functions for Thai string collation
@@ -71,7 +74,7 @@
  *
  * @subsection ThInp Functions for Thai characters input
  *
- * th_isaccept(), th_validate()
+ * th_isaccept(), th_validate(), th_validate_leveled()
  *
  * @subsection ThRend Functions for Thai string rendering
  *
@@ -85,12 +88,12 @@
  *
  */
 
-#include "thbrk/brk-common.h"
+#include "thbrk/thbrk-priv.h"
 
 __attribute__ ((destructor)) void
 _libthai_on_unload ()
 {
-    brk_on_unload ();
+    brk_free_shared_brk ();
 }
 
 /*

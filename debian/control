@@ -4,22 +4,24 @@ Section: libs
 Maintainer: Theppitak Karoonboonyanan <thep@debian.org>
 Uploaders: Loic Minier <lool@dooz.org>
 Build-Depends:
- debhelper (>= 8.1.3),
+ autoconf-archive,
+ debhelper (>= 9),
  dh-autoreconf,
  dpkg-dev (>= 1.16.1~),
  libdatrie-dev,
  libdatrie1-bin,
  pkg-config
-Build-Depends-Indep: doxygen
-Standards-Version: 3.9.5
-Vcs-Git: git://anonscm.debian.org/collab-maint/libthai.git
-Vcs-Browser: http://anonscm.debian.org/gitweb/?p=collab-maint/libthai.git
+Build-Depends-Indep: doxygen (>= 1.8.8)
+Standards-Version: 3.9.8
+Vcs-Git: https://anonscm.debian.org/git/collab-maint/libthai.git
+Vcs-Browser: https://anonscm.debian.org/cgit/collab-maint/libthai.git
 Homepage: http://linux.thai.net/projects/libthai
 
 Package: libthai-dev
 Section: libdevel
 Architecture: any
 Multi-Arch: same
+Pre-Depends: ${misc:Pre-Depends}
 Depends:
  libdatrie-dev,
  libthai0 (= ${binary:Version}),
@@ -67,7 +69,8 @@ Package: libthai-doc
 Section: doc
 Architecture: all
 Multi-Arch: foreign
-Depends: lynx | www-browser, ${misc:Depends}
+Depends: libjs-jquery, ${misc:Depends}
+Suggests: iceweasel | www-browser
 Description: Documentation files for Thai language support library
  LibThai is a set of Thai language support routines aimed to ease
  developers' tasks to incorporate Thai language support in their applications.
@@ -75,3 +78,34 @@ Description: Documentation files for Thai language support library
  output methods as well as basic character and string supports.
  .
  This package contains documents about the LibThai library.
+
+Package: libthai0-udeb
+Package-Type: udeb
+Section: debian-installer
+Architecture: any
+Depends: libthai-data-udeb (>= 0.1.10), ${misc:Depends}, ${shlibs:Depends}
+Description: Thai language support library for D-I use
+ This is a microdeb for the debian-installer.
+ .
+ LibThai is a set of Thai language support routines aimed to ease
+ developers' tasks to incorporate Thai language support in their applications.
+ It includes important Thai-specific functions e.g. word breaking, input and
+ output methods as well as basic character and string supports.
+ .
+ This package provides the shared library needed by the debian-installer.
+
+Package: libthai-data-udeb
+Package-Type: udeb
+Section: debian-installer
+Architecture: all
+Depends: ${misc:Depends}
+Description: Data files for libthai for D-I use
+ This is a microdeb for the debian-installer.
+ .
+ LibThai is a set of Thai language support routines aimed to ease
+ developers' tasks to incorporate Thai language support in their applications.
+ It includes important Thai-specific functions e.g. word breaking, input and
+ output methods as well as basic character and string supports.
+ .
+ This package provides data files needed by the LibThai library under
+ the debian-installer's environment.

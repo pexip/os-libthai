@@ -1,6 +1,6 @@
 /*
  * libthai - Thai Language Support Library
- * Copyright (C) 2001  Theppitak Karoonboonyanan <thep@linux.thai.net>
+ * Copyright (C) 2001  Theppitak Karoonboonyanan <theppitak@gmail.com>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -34,9 +34,24 @@ BEGIN_CDECL
  * @brief  Thai word segmentation
  */
 
-extern int th_brk(const thchar_t *s, int pos[], size_t n);
+typedef struct _ThBrk ThBrk;
 
-extern int th_brk_line(const thchar_t *in, thchar_t *out, size_t n,
+extern ThBrk *th_brk_new(const char *dictpath);
+
+extern void th_brk_delete(ThBrk *brk);
+
+extern int th_brk_find_breaks(ThBrk *brk, const thchar_t *s,
+                              int pos[], size_t pos_sz);
+
+extern int th_brk_insert_breaks(ThBrk *brk, const thchar_t *in,
+                                thchar_t *out, size_t out_sz,
+                                const char *delim);
+
+TH_DEPRECATED_FOR(th_brk_find_breaks)
+extern int th_brk(const thchar_t *s, int pos[], size_t pos_sz);
+
+TH_DEPRECATED_FOR(th_brk_insert_breaks)
+extern int th_brk_line(const thchar_t *in, thchar_t *out, size_t out_sz,
                        const char *delim);
 
 END_CDECL

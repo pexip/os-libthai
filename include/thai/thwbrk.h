@@ -1,6 +1,6 @@
 /*
  * libthai - Thai Language Support Library
- * Copyright (C) 2001  Theppitak Karoonboonyanan <thep@linux.thai.net>
+ * Copyright (C) 2001  Theppitak Karoonboonyanan <theppitak@gmail.com>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -26,6 +26,7 @@
 #define THAI_THWBRK_H
 
 #include <thai/thailib.h>
+#include <thai/thbrk.h>
 
 BEGIN_CDECL
 
@@ -34,9 +35,18 @@ BEGIN_CDECL
  * @brief  Thai wide-char word segmentation
  */
 
-extern int th_wbrk(const thwchar_t *s, int pos[], size_t n);
+extern int th_brk_wc_find_breaks(ThBrk *brk, const thwchar_t *s,
+                                 int pos[], size_t pos_sz);
 
-extern int th_wbrk_line(const thwchar_t *in, thwchar_t *out, size_t n,
+extern int th_brk_wc_insert_breaks(ThBrk *brk, const thwchar_t *in,
+                                   thwchar_t *out, size_t out_sz,
+                                   const thwchar_t *delim);
+
+TH_DEPRECATED_FOR(th_brk_wc_find_breaks)
+extern int th_wbrk(const thwchar_t *s, int pos[], size_t pos_sz);
+
+TH_DEPRECATED_FOR(th_brk_wc_insert_breaks)
+extern int th_wbrk_line(const thwchar_t *in, thwchar_t *out, size_t out_sz,
                         const thwchar_t *delim);
 
 
