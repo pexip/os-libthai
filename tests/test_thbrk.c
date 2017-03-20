@@ -28,8 +28,7 @@ int main (int argc, char* argv[])
   if (interactive) {
     while (!feof (stdin)) {
       printf ("Please enter thai words/sentences: ");
-      fgets ((char *)str, MAXLINELENGTH-1, stdin);
-      if (!feof (stdin)) {
+      if (!fgets ((char *)str, MAXLINELENGTH-1, stdin)) {
         numCut = th_brk (str, pos, MAXLINELENGTH);
         printf ("Total %d cut points.", numCut);
         if (numCut > 0) { 
@@ -46,12 +45,12 @@ int main (int argc, char* argv[])
       }
     }
   } else {
-    strcpy ((char *)str, "สวัสดีครับ นี่เป็นการทดสอบตัวเอง");
+    strcpy ((char *)str, "สวัสดีครับ กอ.รมน. นี่เป็นการทดสอบตัวเอง");
     printf ("Testing with string: %s\n", str);
     numCut = th_brk (str, pos, MAXLINELENGTH);
     printf ("Total %d cut points.", numCut);
-    if (numCut != 6) { 
-      printf("Error! should be 6.. test th_brk() failed...\n");
+    if (numCut != 7) {
+      printf("Error! should be 7.. test th_brk() failed...\n");
       exit (-1);
     }
 	
@@ -63,8 +62,8 @@ int main (int argc, char* argv[])
     outputLength = th_brk_line (str, out, sizeof out, "<WBR>");
     printf ("Output string is %s\n", out);
     printf ("Output string length is %d\n", outputLength);
-    if (outputLength != 62) {
-      printf ("Error! should be 62.. test th_brk_line() failed...\n");
+    if (outputLength != 75) {
+      printf ("Error! should be 75.. test th_brk_line() failed...\n");
       exit (-1);
     }
     printf ("*** End of thbrk self test ******\n");
