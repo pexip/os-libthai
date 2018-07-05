@@ -1,7 +1,7 @@
 /* -*- Mode: C; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- */
 /*
  * libthai - Thai Language Support Library
- * Copyright (C) 2001  Theppitak Karoonboonyanan <thep@linux.thai.net>
+ * Copyright (C) 2001  Theppitak Karoonboonyanan <theppitak@gmail.com>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -21,22 +21,25 @@
 /*
  * brk-maximal.h - Thai word break with maximal matching scheme
  * Created: 2006-08-20
- * Author:  Theppitak Karoonboonyanan <thep@linux.thai.net>
+ * Author:  Theppitak Karoonboonyanan <theppitak@gmail.com>
  */
 
 #ifndef __BRK_MAXIMAL_H
 #define __BRK_MAXIMAL_H
 
 #include <thai/thailib.h>
+#include <thai/thbrk.h>
+
+typedef struct _BrkEnv BrkEnv;
+
+BrkEnv *
+brk_env_new (ThBrk *brk);
 
 void
-brk_maximal_init ();
-
-void
-brk_maximal_quit ();
+brk_env_free (BrkEnv *env);
 
 int
-brk_maximal_do (const thchar_t *s, int len, int pos[], size_t n);
+brk_maximal_do (const thchar_t *s, int len, int pos[], size_t n, BrkEnv *env);
 
 #endif /* __BRK_MAXIMAL_H */
 
