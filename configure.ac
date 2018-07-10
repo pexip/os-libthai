@@ -2,8 +2,11 @@
 
 AC_PREREQ(2.50)
 
-AC_INIT(libthai, 0.1.21, thai-linux-foss-devel@googlegroups.com)
+AC_INIT(libthai,
+        m4_esyscmd([build-aux/git-version-gen]),
+        thai-linux-foss-devel@googlegroups.com)
 AC_CONFIG_SRCDIR([include/thai/thailib.h])
+AC_CONFIG_AUX_DIR(build-aux)
 AC_CONFIG_MACRO_DIR([m4])
 
 AM_INIT_AUTOMAKE(dist-xz no-dist-gzip)
@@ -12,16 +15,16 @@ AM_INIT_AUTOMAKE(dist-xz no-dist-gzip)
 # Library code modified:                    REVISION++
 # Interfaces added:              CURRENT++  REVISION=0  AGE++
 # Interfaces changed/removed:    CURRENT++  REVISION=0  AGE=0
-LT_CURRENT=2
+LT_CURRENT=3
 LT_REVISION=0
-LT_AGE=2
+LT_AGE=3
 AC_SUBST(LT_CURRENT)
 AC_SUBST(LT_REVISION)
 AC_SUBST(LT_AGE)
 
 AC_CONFIG_MACRO_DIR([m4])
 
-DOXYGEN_REQ_VER=1.8.4
+DOXYGEN_REQ_VER=1.8.8
 
 dnl Checks for programs.
 AC_PROG_CC
@@ -89,12 +92,9 @@ if test "x$enable_doxygen_doc" = "xyes"; then
   else
     AC_MSG_CHECKING([doxygen >= $DOXYGEN_REQ_VER])
     DOXYGEN_VER=$($DOXYGEN --version)
-    if expr $DOXYGEN_VER \< $DOXYGEN_REQ_VER > /dev/null; then
-      AC_MSG_RESULT([$DOXYGEN_VER, no, documentation disabled])
-      enable_doxygen_doc="no"
-    else
-      AC_MSG_RESULT([$DOXYGEN_VER, yes])
-    fi
+    AX_COMPARE_VERSION([$DOXYGEN_VER],[ge],[DOXYGEN_REQ_VER], 
+                       [AC_MSG_RESULT([$DOXYGEN_VER, yes])], 
+                       [AC_MSG_RESULT([$DOXYGEN_VER, no, documentation disabled]); enable_doxygen_doc="no"])
   fi
 fi
 
@@ -114,9 +114,9 @@ AC_ARG_ENABLE(dict,
               , enable_dict="yes")
 
 if test "x$enable_dict" = "xyes"; then
-  AC_CHECK_PROGS(TRIETOOL,trietool-0.2,no)
+  AC_CHECK_PROGS(TRIETOOL,[trietool-0.2 trietool],no)
   if test "x$TRIETOOL" = "xno"; then
-    AC_MSG_ERROR([You need trietool-0.2 (from libdatrie package) to generate dict, or just use --disable-dict to skip])
+    AC_MSG_ERROR([You need trietool[[-0.2]] (from libdatrie package) to generate dict, or just use --disable-dict to skip])
   fi
 fi
 

@@ -1,3 +1,688 @@
+2016-12-14  Theppitak Karoonboonyanan  <theppitak@gmail.com>
+
+	* NEWS:
+	=== Version 0.1.26 ===
+
+2016-12-14  Theppitak Karoonboonyanan  <theppitak@gmail.com>
+
+	Include git-version-gen in tarball
+
+	* Makefile.am:
+	  - Add build-aux/git-version-gen to EXTRA_DIST.
+
+2016-12-14  Theppitak Karoonboonyanan  <theppitak@gmail.com>
+
+	Move word.
+
+	* data/tdict-common.txt, data/tdict-ict.txt:
+	  - Move 'แอดมิน' from tdict-common to tdict-ict.
+
+2016-12-14  Theppitak Karoonboonyanan  <theppitak@gmail.com>
+
+	Update word break dictionary.
+
+	* data/tdict-city.txt:
+	* data/tdict-common.txt:
+	* data/tdict-geo.txt:
+	* data/tdict-ict.txt:
+	* data/tdict-proper.txt:
+	* data/tdict-science.txt:
+	* data/tdict-spell.txt:
+	  - Add words.
+
+2016-07-09  Theppitak Karoonboonyanan  <theppitak@gmail.com>
+
+	Move some uncommon compound names out of tdict-std dictionary.
+
+	* data/tdict-std.txt, data/tdict-std-compound.txt:
+	  - Move 'กระดองหาย', 'กระดาดขาว', 'นางรำ', 'นางหงส์'
+	    to tdict-std-compound.
+
+2016-07-08  Theppitak Karoonboonyanan  <theppitak@gmail.com>
+
+	Move compounds out of tdict-std dictionary.
+
+	* data/tdict-std.txt:
+	  - Remove long compound 'ตะลึงพรึงเพริด'.
+	  - Keep only 'สะพรึง' instead of 'สะพรึงกลัว'.
+	* data/tdict-std.txt, data/tdict-std-compound.txt:
+	  - Move compounds 'ตะลุ่มนก', 'ตากวาง', 'ตานนกกด' to tdict-std-compound.
+
+2016-07-08  Theppitak Karoonboonyanan  <theppitak@gmail.com>
+
+	Match git tag with version pattern.
+
+	* build-aux/git-version-gen:
+	  - Apply --match pattern to git-describe to prevent confusion
+	    with other tags.
+	  - Drop unused LF var.
+
+2016-07-07  Theppitak Karoonboonyanan  <theppitak@gmail.com>
+
+	Use versioning based on Git snapshot.
+
+	* Makefile.am:
+	  - Add dist-hook to generate VERSION file on tarball generation.
+	* +build-aux/git-version-gen:
+	  - Add script to generate version based on 'git describe'
+	    if in git tree, or using VERSION file if in release tarball.
+	* configure.ac:
+	  - Call git-version-gen to get package version.
+
+2016-06-28  Theppitak Karoonboonyanan  <theppitak@gmail.com>
+
+	* configure.ac, NEWS:
+	=== Version 0.1.25 ===
+
+2016-06-28  Theppitak Karoonboonyanan  <theppitak@gmail.com>
+
+	Update word break dictionary.
+
+	* data/tdict-common.txt:
+	* data/tdict-district.txt:
+	* data/tdict-ict.txt:
+	* data/tdict-proper.txt:
+	* data/tdict-science.txt:
+	* data/tdict-spell.txt:
+	- Add words.
+
+2016-06-27  Theppitak Karoonboonyanan  <theppitak@gmail.com>
+
+	Document about multi-thread use.
+
+	* src/thbrk/thbrk.c (th_brk_new):
+	  - Add documentation about deleting after use, and about
+	    creating/destroying word breaker instance in critical sections.
+
+2016-06-26  Theppitak Karoonboonyanan  <theppitak@gmail.com>
+
+	Use 'wc' prefix instead of suffix for wide-char word break APIs.
+
+	To be consistent with other modules, wide-char APIs should be
+	prefixed, not suffixed with 'wc'.
+
+	* include/thai/thwbrk.h:
+	* src/libthai.c:
+	* src/libthai.def:
+	* src/libthai.map:
+	* src/thwbrk/thwbrk.c:
+	* tests/test_thwbrk.c:
+	  - Rename th_brk_find_breaks_wc() -> th_brk_wc_find_breaks().
+	  - Rename th_brk_insert_breaks_wc() -> th_brk_wc_insert_breaks().
+
+2016-06-25  Theppitak Karoonboonyanan  <theppitak@gmail.com>
+
+	Rename the new APIs to be more meaningful.
+
+	The methods for ThBrk I proposed to Mark Brown in our discussion
+	were too confusing. Before they get public, let's pick more
+	meaningful names instead:
+	  - th_brk_brk()       -> th_brk_find_breaks()
+	  - th_brk_brk_line()  -> th_brk_insert_breaks()
+	  - th_brk_wbrk()      -> th_brk_find_breaks_wc()
+	  - th_brk_wbrk_line() -> th_brk_insert_breaks_wc()
+
+	* include/thai/thbrk.h:
+	* include/thai/thwbrk.h:
+	* src/libthai.c:
+	* src/libthai.def:
+	* src/libthai.map:
+	* src/thbrk/thbrk.c:
+	* src/thwbrk/thwbrk.c:
+	* tests/test_thbrk.c:
+	* tests/test_thwbrk.c:
+	  - Rename functions as listed above.
+	  - Rename the 'n' argument in the functions to indicate
+	    whose size it describes.
+
+2016-06-24  Theppitak Karoonboonyanan  <theppitak@gmail.com>
+
+	Add function deprecation warnings.
+
+	* include/thai/thailib.h:
+	  - Add TH_DEPRECATED and TH_DEPRECATED_FOR() macros,
+	    taken from GLib.
+	* include/thai/thbrk.h (th_brk, th_brk_line):
+	* include/thai/thwbrk.h (th_wbrk, th_wbrk_line):
+	  - Apply TH_DEPRECATED_FOR() to deprecated functions,
+	    with suggestions for alternatives.
+
+2016-06-24  Theppitak Karoonboonyanan  <theppitak@gmail.com>
+
+	Update tests to test new APIs.
+
+	* tests/test_thbrk.c (main), tests/test_thwbk.c (main):
+	  - Create, use, and free ThBrk instance with the new APIs
+	    instead of the deprecated ones.
+
+2016-06-23  Theppitak Karoonboonyanan  <theppitak@gmail.com>
+
+	Update documentation for API deprecation.
+
+	* src/thbrk/thbrk.c, src/thwbrk/thwbrk.c:
+	  - Add info for deprecated functions.
+	  - Add availability info for new functions.
+
+	* src/thinp/thinp.c:
+	  - Add availability info for th_validate_leveled().
+
+	* src/libthai.c:
+	  - Add missing link to th_validate_leveled().
+
+2016-06-23  Theppitak Karoonboonyanan  <theppitak@gmail.com>
+
+	Update library versioning.
+
+	* configure.ac:
+	  - Bump library versions to reflect the added API.
+
+2016-06-22  Mark Brown  <mark@mercurylang.org>
+
+	Implement a new thread-safe interface for word break.
+
+	To achieve more thread-safety without depending on mutex mechanisms,
+	a new set of APIs is added so that the client can create
+	a shared instance of word break engine by him/herself
+	under appropriate mutex. Then, the word break functions
+	can be safely called in parallel using the shared engine.
+
+
+	* include/thai/thbrk.h:
+	* include/thai/thwbrk.h:
+	* src/libthai.c:
+	* src/libthai.def:
+	* src/libthai.map:
+	  - Add new exported APIs:
+	    th_brk_new(), th_brk_delete(),
+	    th_brk_brk(), th_brk_brk_line(),
+	    th_brk_wbrk(), th_brk_wbrk_line().
+
+	* src/thbrk/brk-common.h, src/thbrk/brk-common.c
+	  (-brk_on_unload, -brk_get_dict, +brk_load_default_dict):
+	  - Remove old shared dict management. It's to be as part of
+	    ThBrk implementation in ThBrk layer instead.
+	  - The logic for finding and loading dictionary at
+	    default paths is still retained here.
+
+	* src/thbrk/thbrk.c (th_brk_new, th_brk_delete):
+	  - Implement ThBrk (de)allocation, with dictionary loading
+	    at specified path or at default paths if not specified.
+
+	* src/thbrk/brk-maximal.h, src/thbrk/brk-maximal.c
+	  (struct _BrkEnv, brk_env_new):
+	  - Add ThBrk engine as a member of BrkEnv.
+	* src/thbrk/brk-maximal.c (brk_root_pool):
+	  - Access dict trie from ThBrk in BrkEnv instead of getting
+	    shared dict directly.
+
+	* src/thbrk/thbrk.c
+	    (th_brk -> th_brk_brk, th_brk_line -> th_brk_brk_line):
+	* src/thwbrk/thwbrk.c
+	    (th_wbrk -> th_brk_wbrk, th_wbrk_line -> th_brk_wbrk_line):
+	  - Modify old functions to new ones by adding ThBrk* parameter.
+
+	* src/thbrk/Makefile.am, +src/thbrk/thbrk-priv.h,
+	  src/thbrk/thbrk.c (brk_get_shared_brk, brk_free_shared_brk):
+	  - Add functions for managing the shared engine to preserve
+	    old behavior.
+	* src/libthai.c (_libthai_on_unload):
+	  - Call brk_free_shared_brk() on unload.
+	* src/thbrk/thbrk.c (th_brk, th_brk_line):
+	* src/thwbrk/thwbrk.c (th_wbrk, th_wbrk_line):
+	  - Provide old APIs as wrappers to the new APIs,
+	    for backward compatibility.
+
+	Merging pull request #1.
+
+2016-05-02  Theppitak Karoonboonyanan  <theppitak@gmail.com>
+
+	Update word break dictionary.
+
+	* data/tdict-common.txt:
+	* data/tdict-spell.txt: Add words.
+
+2016-03-28  Theppitak Karoonboonyanan  <theppitak@gmail.com>
+
+	Do not test word breaking if dict is disabled.
+
+	* tests/Makefile.am:
+	  - Only add test-thbrk.sh and test-thwbrk.sh to TESTS
+	    when dictionary is enabled.
+
+2016-03-03  Theppitak Karoonboonyanan  <theppitak@gmail.com>
+
+	Get rid of unused variable.
+
+	* src/thrend/thrend.c (tis620_0_shape_table_):
+	  - Comment out unused variable reported by GCC 6.
+
+2016-01-28  Theppitak Karoonboonyanan  <theppitak@gmail.com>
+
+	Make source more readable.
+
+	* src/thbrk/brk-common.c (brk_get_dict):
+	  - Break assignment and comparison chain on reading
+	    LIBTHAI_DICTDIR environment.
+
+2016-01-20  Theppitak Karoonboonyanan  <theppitak@gmail.com>
+
+	Fix compilation error with GCC 6
+
+	* include/thai/thctype.h (_th_bitmsk):
+	  - Use unsigned int instead of unsigned short for bitmask base,
+	    as GCC 6 takes ~0 as -1 for unsigned short,
+	    and causes compilation error for scim-thai.
+
+	Thanks Martin Michlmayr for the report via Debian #811690
+	http://bugs.debian.org/811690
+
+2016-01-20  Theppitak Karoonboonyanan  <theppitak@gmail.com>
+
+	* configure.ac: Post-release version suffix added.
+
+2015-11-22  Theppitak Karoonboonyanan  <theppitak@gmail.com>
+
+	* configure.ac:
+	  - Bump library revision to reflect code changes.
+
+	* configure.ac, NEWS:
+	=== Version 0.1.24 ===
+
+2015-11-22  Theppitak Karoonboonyanan  <theppitak@gmail.com>
+
+	Update word break dictionary.
+
+	* data/tdict-city.txt:
+	* data/tdict-common.txt:
+	* data/tdict-proper.txt:
+	* data/tdict-science.txt: Add words.
+
+2015-11-22  Theppitak Karoonboonyanan  <theppitak@gmail.com>
+
+	Fix infinite loop introduced by recent optimization.
+
+	* src/thbrk/brk-maximal.c (brk_recover_try):
+	  - Update 'pool' correctly when deleting matched BrkPool node.
+	    brk_pool_delete_node() cannot be started at pool_tail indeed.
+
+	Thanks Zack Weinberg for the report via Debian #805703
+	http://bugs.debian.org/805703
+
+2015-11-22  Theppitak Karoonboonyanan  <theppitak@gmail.com>
+
+	* configure.ac: Post-release version suffix added.
+
+2015-10-22  Theppitak Karoonboonyanan  <theppitak@gmail.com>
+
+	* configure.ac:
+	  - Bump library revision to reflect code changes.
+
+	* configure.ac, NEWS:
+	=== Version 0.1.23 ===
+
+2015-10-21  Theppitak Karoonboonyanan  <theppitak@gmail.com>
+
+	Update word break dictionary.
+
+	* data/tdict-city.txt:
+	* data/tdict-common.txt:
+	* data/tdict-country.txt:
+	* data/tdict-ict.txt:
+	* data/tdict-lang-ethnic.txt:
+	* data/tdict-proper.txt:
+	* data/tdict-science.txt:
+	* data/tdict-spell.txt: Add words.
+
+2015-10-16  Theppitak Karoonboonyanan  <theppitak@gmail.com>
+
+	Share BrkEnv longer.
+
+	The code before the threadsafe commit used to initialize the
+	free list earlier in th_brk() and then called brk_maximal_do()
+	multiple times. This allowed the free list to be shared among
+	all such calls. The threadsafe commit did it deep in
+	brk_maximal_do_impl(), limiting the share within the single
+	brk_maximal_do() call only. We should widen the use to be
+	the same as previously done.
+
+	* src/thbrk/brk-maximal.h (+brk_env_new, +brk_env_free):
+	  - Re-add initialization/quit functions in terms of BrkEnv.
+	  - Add BrkEnv* arg to brk_maximal_do().
+	* src/thbrk/brk-maximal.c (brk_env_init -> brk_env_new,
+	  brk_env_destroy -> brk_env_free):
+	  - Turn the init/destroy functions into new/free version.
+	* src/thbrk/brk-maximal.c (brk_maximal_do, brk_maximal_do_impl):
+	  - Add the BrkEnv* arg and use it instead of the locally created
+	    one.
+	* src/thbrk/thbrk.c (th_brk):
+	  - Create BrkEnv object at start and free it at end.
+	  - Add the env arg to brk_maximal_do() calls.
+
+	This appears to save more 2.4% of the total runtime and makes
+	it on par with the code before the threadsafe commit again.
+
+2015-10-14  Theppitak Karoonboonyanan  <theppitak@gmail.com>
+
+	Call brk_pool_match() linearly.
+
+	* src/thbrk/brk-maximal.c (brk_maximal_do_impl, brk_recover_try):
+	  - Start next brk_pool_match() on node next to previously matched
+	    one, instead of the pool head, making the match O(n) instead of
+	    O(n^2).
+	  - [brk_maximal_do_impl] Also prevent using the deleted node to
+	    start the next round.
+	  - [brk_recover_try] Also start brk_pool_delete_node() on the
+	    pool tail, making it also linear. This is not possible for
+	    brk_maximal_do_impl, as the node to be deleted is not fixed.
+
+	This appears to save time by 8.85% on brk_pool_match() calls,
+	lowering its bottleneck rank by 2 positions, and saves time by
+	0.0388% of total run time.
+
+2015-10-14  Theppitak Karoonboonyanan  <theppitak@gmail.com>
+
+	Declare variable inside block.
+
+	* src/thbrk/brk-maximal.c (brk_maximal_do_impl, brk_recover_try):
+	  - Move "BrkPool *match" declaration into the block it's used.
+
+2015-10-12  Theppitak Karoonboonyanan  <theppitak@gmail.com>
+
+	Declare const arg for brk_pool_match().
+
+	* src/thbrk/brk-maximal.c (brk_pool_match):
+	  - Add const-ness to the read-only 'node' arg.
+
+2015-10-11  Theppitak Karoonboonyanan  <theppitak@gmail.com>
+
+	Minor optimization on brk_pool_match().
+
+	Callgrind reports brk_pool_match() among top bottlenecks.
+	So, try to optimize it as we can.
+
+	* src/thbrk/brk-maximal.c (brk_pool_match):
+	  - Instead of sharing the loop for two different cases,
+	    check the case once and run loop for each case separately,
+	    to minimize branching down to a single time.
+	  - Evaluate the unchanged 'node->shot.brk_pos[node_cur_pos - 1]'
+	    expression only once, instead of on every round.
+
+	This appears to save time by 9.3% for total brk_pool_match() calls,
+	and by 0.067% of total run time.
+
+2015-10-11  Theppitak Karoonboonyanan  <theppitak@gmail.com>
+
+	Fix 'make check' error on long path names.
+
+	* tests/thsort.c (main):
+	  - Increase file name buffers from 64 to 512, to afford long path
+	    names in command-line arguments.
+
+2015-10-10  Theppitak Karoonboonyanan  <theppitak@gmail.com>
+
+	Replace static global free-list with local one.
+
+	The static global free-list in brk-maximal.c makes it not
+	thread-safe.
+
+	* src/thbrk/brk-maximal.c:
+	  - Add type BrkEnv to keep break pool free list, with
+	    brk_env_init() and brk_env_destroy() methods.
+	  - (brk_pool_node_new, brk_pool_node_free, brk_pool_free,
+	     brk_pool_delete, brk_root_pool, brk_recover_try,
+	     brk_recover):
+	    Add (BrkEnv *) arg to relevant functions and use it properly.
+	  - (brk_maximal_do):
+	    Create and destroy BrkEnv instance for use locally.
+	    Pass it to the required function calls.
+	  - (brk_pool_delete -> brk_pool_delete_node):
+	    Rename function to avoid confusion with brk_pool_free().
+
+	* src/thbrk/brk-maximal.c:
+	* src/thbrk/brk-maximal.h:
+	* src/thbrk/thbrk.c:
+	  - Get rid of now-unnecessary brk_maximal_init() and
+	    brk_maximal_quit().
+
+	Thanks Behdad Esfahbod for the report.
+
+2015-09-07  Theppitak Karoonboonyanan  <theppitak@gmail.com>
+
+	Fix doxygen version checking.
+
+	* configure.ac:
+	  - Correctly compare doxygen versions. Simple expr comparison
+	    didn't work with version 1.8.10.
+
+	Taken from Petr Gajdos <pgajdos@suse.cz>'s patch for libdatrie.
+
+2015-06-04  Theppitak Karoonboonyanan  <theppitak@gmail.com>
+
+	Protect against invalid array access.
+
+	* src/thbrk/thbrk.c (th_brk):
+	  - Add a condition to protect against accessing pos[-1]
+	    which may be caused by a failure in brk_maximal_do()
+	    on the first Thai chunk, which makes cur_pos remain 0.
+
+	Thanks Behdad Esfahbod for the report.
+
+2015-06-04  Theppitak Karoonboonyanan  <theppitak@gmail.com>
+
+	* configure.ac: Post-release version suffix added.
+
+2015-05-08  Theppitak Karoonboonyanan  <theppitak@gmail.com>
+
+	* configure.ac, NEWS:
+	=== Version 0.1.22 ===
+
+2015-05-08  Theppitak Karoonboonyanan  <theppitak@gmail.com>
+
+	* configure.ac: Bump library revision, due to code change.
+
+2015-05-08  Theppitak Karoonboonyanan  <theppitak@gmail.com>
+
+	Fix 'make distcheck' failure.
+
+	* doc/Makefile.am:
+	  - Remove doxygen db file on clean.
+
+2015-05-06  Theppitak Karoonboonyanan  <theppitak@gmail.com>
+
+	Update word break dictionary.
+
+	* data/tdict-common.txt:
+	* data/tdict-ict.txt:
+	* data/tdict-proper.txt:
+	* data/tdict-science.txt: Add words.
+
+2015-05-06  Theppitak Karoonboonyanan  <theppitak@gmail.com>
+
+	Use my Gmail e-mail address everywhere.
+
+	* AUTHORS:
+	* include/thai/thailib.h:
+	* include/thai/thbrk.h:
+	* include/thai/thcell.h:
+	* include/thai/thcoll.h:
+	* include/thai/thctype.h:
+	* include/thai/thinp.h:
+	* include/thai/thrend.h:
+	* include/thai/thstr.h:
+	* include/thai/thwbrk.h:
+	* include/thai/thwchar.h:
+	* include/thai/thwcoll.h:
+	* include/thai/thwctype.h:
+	* include/thai/thwinp.h:
+	* include/thai/thwrend.h:
+	* include/thai/thwstr.h:
+	* include/thai/tis.h:
+	* include/thai/wtt.h:
+	* man/man3/libthai.3:
+	* man/man3/thctype.3:
+	* man/man3/wtt.3:
+	* man/template.3:
+	* src/libthai.c:
+	* src/thbrk/brk-common.c:
+	* src/thbrk/brk-common.h:
+	* src/thbrk/brk-ctype.c:
+	* src/thbrk/brk-ctype.h:
+	* src/thbrk/brk-maximal.c:
+	* src/thbrk/brk-maximal.h:
+	* src/thbrk/thbrk.c:
+	* src/thcell/thcell.c:
+	* src/thcoll/cweight.c:
+	* src/thcoll/cweight.h:
+	* src/thcoll/thcoll.c:
+	* src/thctype/thctype.c:
+	* src/thctype/wtt.c:
+	* src/thinp/thinp.c:
+	* src/thrend/thrend.c:
+	* src/thstr/thstr.c:
+	* src/thwbrk/thwbrk.c:
+	* src/thwchar/thwchar.c:
+	* src/thwctype/thwctype.c:
+	* src/thwstr/thwstr.c:
+	* tests/thsort.c:
+	  - Replace my e-mail address with the Gmail one.
+
+2015-05-06  Theppitak Karoonboonyanan  <theppitak@gmail.com>
+
+	More LIKELY/UNLIKELY hints.
+
+	* src/thbrk/brk-maximal.c (brk_recover):
+	  - Add UNLIKELY to recovery history hits, reducing time by 0.03%
+
+2015-05-06  Theppitak Karoonboonyanan  <theppitak@gmail.com>
+
+	Split LIKELY/UNLIKELY to a separate header.
+
+	This prevents modules from depending on brk-common.h,
+	which provides low-level APIs for breaker backends.
+
+	* src/thbrk/Makefile.am, src/thbrk/brk-common.h
+	  +src/thbrk/thbrk-utils.h:
+	  - Move LIKELY/UNLIKELY macro definitions from brk-common.h
+	    to a new header thbrk-utils.h
+	* src/thbrk/brk-common.c, src/thbrk/brk-maximal.c, src/thbrk/thbrk.c:
+	  - Include thbrk-utils.h instead of brk-common.h for LIKELY/UNLIKELY.
+
+2015-05-04  Theppitak Karoonboonyanan  <theppitak@gmail.com>
+
+	More LIKELY/UNLIKELY hints.
+
+	* src/thbrk/thbrk.c (th_brk_line):
+	  - Add UNLIKELY() on error conditions.
+
+	Note: adding UNLIKELY() to th_brk() first if-statement makes it
+	slower, which is weird. So, not added there.
+
+2015-05-02  Theppitak Karoonboonyanan  <theppitak@gmail.com>
+
+	* configure.ac: Bump library revision, due to code change.
+
+2015-05-02  Theppitak Karoonboonyanan  <theppitak@gmail.com>
+
+	Update word break dictionary.
+
+	* data/tdict-common.txt:
+	* data/tdict-ict.txt:
+	* data/tdict-proper.txt:
+	* data/tdict-science.txt:
+	* data/tdict-spell.txt: Add words.
+
+2015-04-30  Theppitak Karoonboonyanan  <theppitak@gmail.com>
+
+	Catch error on break hints allocation.
+
+	* src/thbrk/brk-maximal.c (brk_maximal_do):
+	  - Do not continue if brkpos_hints allocation fails.
+
+2015-04-30  Theppitak Karoonboonyanan  <theppitak@gmail.com>
+
+	Do TIS-to-Unicode conversion only once on word breaking.
+
+	* src/thbrk/brk-maximal.c (brk_maximal_do):
+	  - Convert input string to Unicode before passing to
+	    brk_maximal_do_impl().
+	* src/thbrk/brk-maximal.c (brk_maximal_do_impl, brk_recover,
+	  brk_recover_try):
+	  - Redeclare to accept wide char string.
+	  - Do not call th_tis2uni() on every input char.
+
+	This appears to reduce word breaking time by 0.28% on test case.
+	Thanks edgehogapp@gmail.com for the suggestion.
+	https://groups.google.com/forum/#!topic/thai-linux-foss-devel/Be-OLMRYF7M
+
+2015-04-29  Theppitak Karoonboonyanan  <theppitak@gmail.com>
+
+	Bump doxygen required version.
+
+	* configure.ac:
+	  - Bump doxygen required version to 1.8.8, according to recent
+	    Doxyfile update.
+
+2015-03-07  Theppitak Karoonboonyanan  <theppitak@gmail.com>
+
+	Also check for 'trietool' (without -0.2 suffix)
+
+	* configure.ac:
+	  - Check for both trietool-0.2 (for libdatrie < 0.2.9) and
+	    trietool (for libdatrie >= 0.2.9) utility.
+
+2015-03-06  Theppitak Karoonboonyanan  <theppitak@gmail.com>
+
+	Update Doxyfile.
+
+	* doc/Doxyfile.in:
+	  - Updated for doxygen 1.8.8 with 'doxygen -u'.
+
+2015-03-06  Theppitak Karoonboonyanan  <theppitak@gmail.com>
+
+	Fix compiler warning.
+
+	* src/thbrk/brk-maximal.c (brk_recover):
+	  - Initialize last_brk_pos on declaration.
+
+2015-02-05  Theppitak Karoonboonyanan  <theppitak@gmail.com>
+
+	Disable timestamp in Doxygen-generated doc.
+
+	* doc/Doxyfile.in:
+	  - Set HTML_TIMESTAMP to NO to make the document reproducible.
+	    (reported by Debian Reproducible)
+
+2015-02-04  Theppitak Karoonboonyanan  <theppitak@gmail.com>
+
+	Micro-optimize with likely/unlikely hints.
+
+	* src/thbrk/brk-common.h:
+	  - Add LIKELY() and UNLIKELY() macros based on compiler extension.
+	* src/thbrk/brk-common.c (brk_get_dict):
+	* src/thbrk/brk-maximal.c (brk_maximal_do_impl, brk_root_pool,
+	  brk_shot_init, brk_pool_node_new, best_brk_new):
+	  - Use LIKELY() and UNLIKELY() where it is known to be so, mostly
+	    for one-time initialization and failure handling.
+
+	Callgrind says it does help speed up a little bit.
+
+2014-12-16  Theppitak Karoonboonyanan  <theppitak@gmail.com>
+
+	Update word break dictionary.
+
+	* data/tdict-city.txt:
+	* data/tdict-collection.txt:
+	* data/tdict-common.txt:
+	* data/tdict-country.txt:
+	* data/tdict-ict.txt:
+	* data/tdict-proper.txt:
+	* data/tdict-science.txt:
+	* data/tdict-spell.txt: Add words.
+
+2014-08-23  Theppitak Karoonboonyanan  <theppitak@gmail.com>
+
+	* configure.ac: Post-release version suffix added.
+
 2014-08-21  Theppitak Karoonboonyanan  <theppitak@gmail.com>
 
 	* configure.ac, NEWS:

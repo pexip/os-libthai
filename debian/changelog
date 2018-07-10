@@ -1,3 +1,93 @@
+libthai (0.1.26-1) unstable; urgency=medium
+
+  * New upstream version 0.1.26
+  * Explicitly add hardening build flags to get "bindnow" [lintian]
+
+ -- Theppitak Karoonboonyanan <thep@debian.org>  Wed, 14 Dec 2016 23:31:12 +0700
+
+libthai (0.1.25-2) unstable; urgency=medium
+
+  * Correctly install doc according to Policy 12.3
+    - Install doc under libthai0 doc dir (/usr/share/doc/libthai0),
+      not a separate dir without the ending "0".
+  * Fix FTCBFS: Honour DEB_BUILD_OPTIONS=nocheck.
+    Thanks Helmut Grohne for the report and patch. (Closes: #840812)
+
+ -- Theppitak Karoonboonyanan <thep@debian.org>  Sat, 15 Oct 2016 16:04:01 +0700
+
+libthai (0.1.25-1) unstable; urgency=medium
+
+  * Imported Upstream version 0.1.25
+  * debian/patches/01_gcc6-ftbfs.patch:
+    - Drop patch taken from upstream.
+  * debian/libthai0.symbols: Updated for new functions.
+  * Use cgit in Vcs-Browser.
+  * debian/copyright: Update years & e-mail address.
+  * Bump Standards-Version to 3.9.8, with changes:
+    - Install doc in from libthai-doc under /usr/share/doc/libthai
+      instead of /usr/share/doc/libthai-doc, as recommended in Section 12.3
+  * Update author e-mail address in doc-base.
+
+ -- Theppitak Karoonboonyanan <thep@debian.org>  Tue, 28 Jun 2016 15:29:34 +0700
+
+libthai (0.1.24-2) unstable; urgency=medium
+
+  * Use system jquery.js for doc package [lintian].
+    - d/control: Add dependency on libjs-jquery.
+    - d/rules: Exclude jquery.js on dh_install.
+    - d/libthai-doc.links: Add symlinks for jquery.js to system file.
+    - d/control: Demote web browser from Depends to Suggests;
+      Use iceweasel instead of lynx.
+  * Convert rules to dh.
+    - d/rules: Rewrite rules using dh with appropriate overrides.
+    - d/compat: Bump to level 9, to get multiarch support from dh.
+    - d/control: B-Dep on debhelper >= 9.
+  * Use HTTPS in Vcs-* fields [lintian].
+  * Fix FTBFS with GCC 6 on scim-thai.
+    - 01_gcc6-ftbfs.patch: Cherry-pick upstream patch to fix FTBFS with GCC 6
+      on scim-thai. (Closes: #811690)
+
+ -- Theppitak Karoonboonyanan <thep@debian.org>  Tue, 02 Feb 2016 12:19:51 +0700
+
+libthai (0.1.24-1) unstable; urgency=high
+
+  * Imported Upstream version 0.1.24
+    - Fix infinite loop introduced in previous version.
+      Thanks Zack Weinberg for the report. (Closes: #805703)
+
+ -- Theppitak Karoonboonyanan <thep@debian.org>  Sun, 22 Nov 2015 16:34:32 +0700
+
+libthai (0.1.23-1) unstable; urgency=medium
+
+  * Imported Upstream version 0.1.23 (Closes: #803374)
+  * Add B-Dep on autoconf-archive required to autoreconf new upstream.
+
+ -- Theppitak Karoonboonyanan <thep@debian.org>  Tue, 03 Nov 2015 12:16:06 +0700
+
+libthai (0.1.22-3) unstable; urgency=medium
+
+  * Build udeb for d-i (Closes: #800369)
+
+ -- Theppitak Karoonboonyanan <thep@debian.org>  Fri, 09 Oct 2015 10:28:55 +0700
+
+libthai (0.1.22-2) unstable; urgency=medium
+
+  * Add maintscript to handle symlink-to-dir in -dev package.
+    - d/libdatrie-dev.maintscript: Add maintscript.
+    - d/control: Add Pre-Depends for the maintscript helper.
+    (Closes: #788164)
+
+ -- Theppitak Karoonboonyanan <thep@debian.org>  Wed, 10 Jun 2015 13:59:14 +0700
+
+libthai (0.1.22-1) unstable; urgency=medium
+
+  * Install libthai-dev docs as symlinks.
+  * Imported Upstream version 0.1.22
+  * Specify versioned b-dep for doxygen, as per upstream
+  * Bump Standards-Version to 3.9.6 (no changes)
+
+ -- Theppitak Karoonboonyanan <thep@debian.org>  Fri, 08 May 2015 12:04:21 +0700
+
 libthai (0.1.21-1pexip1) pexip; urgency=low
 
   * Migrate to Jessie
