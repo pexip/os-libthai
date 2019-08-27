@@ -10,7 +10,7 @@ SHARED_PKG := libthai0
 SHLIB_VER := 0.1.12
 
 %:
-	dh $@ --with autoreconf
+	dh $@
 
 override_dh_auto_build-indep:
 	dh_auto_build -- -C data
@@ -58,5 +58,4 @@ override_dh_installdocs-arch:
 	dh_installdocs --remaining-packages -a
 
 override_dh_makeshlibs:
-	dh_makeshlibs -a -p$(SHARED_PKG) -V '$(SHARED_PKG) (>= $(SHLIB_VER))' \
-		--add-udeb="libthai0-udeb"
+	dh_makeshlibs -a -p$(SHARED_PKG) -V '$(SHARED_PKG) (>= $(SHLIB_VER))'
