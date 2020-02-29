@@ -1,3 +1,198 @@
+2018-08-01  Theppitak Karoonboonyanan  <theppitak@gmail.com>
+
+	* NEWS:
+	=== Version 0.1.28 ===
+
+2018-08-01  Theppitak Karoonboonyanan  <theppitak@gmail.com>
+
+	Update README.
+
+	* README:
+	  - Use HTTPS in project URL.
+
+2018-08-01  Theppitak Karoonboonyanan  <theppitak@gmail.com>
+
+	Update library versioning.
+
+	* configure.ac:
+	  - Bump library revision to reflect code change.
+
+2018-08-01  Theppitak Karoonboonyanan  <theppitak@gmail.com>
+
+	Update word break dictionary.
+
+	* data/tdict-city.txt:
+	* data/tdict-common.txt:
+	* data/tdict-proper.txt:
+	* data/tdict-science.txt:
+	* data/tdict-spell.txt:
+	  - Add words.
+
+2018-06-21  Theppitak Karoonboonyanan  <theppitak@gmail.com>
+
+	Fix warning on comma at the end of enum list
+
+	* src/thbrk/brk-ctype.h (brk_op_t):
+	  - Remove comma at the end of enum list (-Wpedantic)
+
+2018-06-14  Theppitak Karoonboonyanan  <theppitak@gmail.com>
+
+	Adjust pointer declaration style
+
+	* src/thbrk/brk-common.c (brk_load_default_dict):
+	  - Adjust pointer declaration style for 'dict_trie'
+
+2018-06-14  Theppitak Karoonboonyanan  <theppitak@gmail.com>
+
+	Avoid non-ANSI C snprintf()
+
+	* src/thbrk/brk-common.c (+full_path, brk_load_default_dict):
+	  - Instead of preparing full path name with snprintf(), which is
+	    non-ANSI, and still risks path name trimming, do it with
+	    size-calculated malloc().
+	  - free() it as needed.
+
+2018-06-12  Theppitak Karoonboonyanan  <theppitak@gmail.com>
+
+	Update word break dictionary.
+
+	* data/tdict-common.txt:
+	* data/tdict-district.txt:
+	* data/tdict-ict.txt:
+	* data/tdict-proper.txt:
+	* data/tdict-spell.txt:
+	  - Add words suggested by @nuttee15 in issue #2
+	    https://github.com/tlwg/libthai/issues/2#issuecomment-396442354
+	    https://github.com/tlwg/libthai/issues/2#issuecomment-396456551
+	    Thank you very much!
+
+2018-06-12  Theppitak Karoonboonyanan  <theppitak@gmail.com>
+
+	Add 2 words from new RI dictionary.
+
+	* data/tdict-std.txt:
+	  - Add 'กายินทรีย์' and 'กาเยนทรีย์' from new RI dict.
+
+2018-06-12  Theppitak Karoonboonyanan  <theppitak@gmail.com>
+
+	Update word break dictionary.
+
+	* data/tdict-city.txt:
+	* data/tdict-common.txt:
+	* data/tdict-district.txt:
+	* data/tdict-geo.txt:
+	* data/tdict-history.txt:
+	* data/tdict-ict.txt:
+	* data/tdict-lang-ethnic.txt:
+	* data/tdict-proper.txt:
+	* data/tdict-science.txt:
+	* data/tdict-slang.txt:
+	* data/tdict-spell.txt:
+	  - Add words.
+
+2018-05-31  Theppitak Karoonboonyanan  <theppitak@gmail.com>
+
+	Add missing includes in header files.
+
+	* include/thai/thwbrk.h:
+	* include/thai/thwcoll.h:
+	* include/thai/thwinp.h:
+	* include/thai/thwrend.h:
+	  - Add missing #include <thai/thwchar.h>
+
+2018-01-08  Theppitak Karoonboonyanan  <theppitak@gmail.com>
+
+	Move some entries in tdict-common to proper files.
+
+	* data/Makefile.am, +data/tdict-slang.txt:
+	  - Add file for keeping slangs.
+
+	* data/tdict-common.txt:
+	* data/tdict-ict.txt:
+	* data/tdict-lang-ethnic.txt:
+	* data/tdict-proper.txt:
+	* data/tdict-science.txt:
+	* data/tdict-slang.txt:
+	* data/tdict-spell.txt:
+	  - Move entries in tdict-common to more proper files.
+
+2018-01-08  Theppitak Karoonboonyanan  <theppitak@gmail.com>
+
+	Update word break dictionary.
+
+	* data/tdict-common.txt:
+	* data/tdict-country.txt:
+	* data/tdict-district.txt:
+	* data/tdict-ict.txt:
+	* data/tdict-lang-ethnic.txt:
+	* data/tdict-proper.txt:
+	* data/tdict-science.txt:
+	* data/tdict-spell.txt:
+	  - Add words.
+
+	* data/tdict-history.txt:
+	  - Replace "ลาลูแบร์" with just "ลูแบร์".
+
+2017-10-25  Theppitak Karoonboonyanan  <theppitak@gmail.com>
+
+	* NEWS:
+	=== Version 0.1.27 ===
+
+2017-10-25  Theppitak Karoonboonyanan  <theppitak@gmail.com>
+
+	Update word break dictionary.
+
+	* data/tdict-city.txt:
+	* data/tdict-common.txt:
+	* data/tdict-district.txt:
+	* data/tdict-geo.txt:
+	* data/tdict-history.txt:
+	* data/tdict-ict.txt:
+	* data/tdict-lang-ethnic.txt:
+	* data/tdict-proper.txt:
+	* data/tdict-science.txt:
+	* data/tdict-spell.txt:
+	  - Add words.
+
+	* data/tdict-proper.txt:
+	  - Correct order for some entries.
+
+2017-08-07  Theppitak Karoonboonyanan  <theppitak@gmail.com>
+
+	Strip prefix for C source files in doc
+
+	* doc/Doxyfile.in:
+	  - Append "@top_srcdir@/src" and "@top_srcdir@/tests"
+	    to STRIP_FROM_PATH, so that references to source directories
+	    in the generated document do not capture full build path.
+
+	Defect caught by Debian Reproducible
+
+2017-06-29  Theppitak Karoonboonyanan  <theppitak@gmail.com>
+
+	Remove duplicated dict entry.
+
+	* data/tdict-common.txt:
+	  - Remove 'ดัมพ์' which is already in tdict-std.
+	* data/tdict-common.txt:
+	* data/tdict-spell.txt:
+	  - Move 'ดั๊มพ์' from tdict-common to tdict-spell.
+
+2017-06-29  Theppitak Karoonboonyanan  <theppitak@gmail.com>
+
+	Update word break dictionary.
+
+	* data/tdict-city.txt:
+	* data/tdict-common.txt:
+	* data/tdict-district.txt:
+	* data/tdict-geo.txt:
+	* data/tdict-ict.txt:
+	* data/tdict-lang-ethnic.txt:
+	* data/tdict-proper.txt:
+	* data/tdict-science.txt:
+	* data/tdict-spell.txt:
+	  - Add words.
+
 2016-12-14  Theppitak Karoonboonyanan  <theppitak@gmail.com>
 
 	* NEWS:

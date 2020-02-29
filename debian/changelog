@@ -1,3 +1,87 @@
+libthai (0.1.28-2) unstable; urgency=medium
+
+  [ Ondřej Nový ]
+  * d/changelog: Remove trailing whitespaces
+
+  [ Theppitak Karoonboonyanan ]
+  * Drop iceweasel from libthai-doc Suggests
+  * Switch to dh level 12
+    - d/control: B-Dep on debhelper-compat (= 12) instead of debhelper
+    - d/compat: Removed
+  * d/copyright: Update years on packaging
+  * Bump Standards-Version to 4.3.0 (no changes)
+  * d/gbp.conf: Added, following DEP-14
+
+ -- Theppitak Karoonboonyanan <thep@debian.org>  Sat, 02 Feb 2019 16:27:30 +0700
+
+libthai (0.1.28-1) unstable; urgency=medium
+
+  * Add Depends: pkg-config to libthai-dev
+  * New upstream version 0.1.28
+  * d/copyright: Update upstream years
+  * d/control: Add "Rules-Requires-Root: no"
+    The build output has been verified to be bit-by-bit identical
+    with and without.
+  * Bump Standards-Version to 4.1.5 (no further changes)
+
+ -- Theppitak Karoonboonyanan <thep@debian.org>  Wed, 01 Aug 2018 14:02:22 +0700
+
+libthai (0.1.27-2) unstable; urgency=medium
+
+  * Update Vcs fields for migration to salsa.debian.org
+  * Bump debhelper compat to level 11
+    - d/compat: 10 -> 11
+    - d/control: Bump debhelper version to >= 11
+    - d/rules, d/libthai-doc.docs, -d/libthai-doc.install:
+      Use dh 11 dh_installdocs to install generated doc directly
+      instead of using upstream install, as 'nodoc' DEB_BUILD_OPTIONS
+      is now supported with more concise steps.
+    - d/libthai-doc.docs:
+      Don't install NEWS et. al., to avoid conflicts with libthai0
+  * Bump Standards-Version to 4.1.3 (no changes)
+  * d/copyright: Update years
+
+ -- Theppitak Karoonboonyanan <thep@debian.org>  Fri, 16 Feb 2018 14:49:29 +0700
+
+libthai (0.1.27-1) unstable; urgency=medium
+
+  * Add autopkgtest test suite
+    - d/control: Add Testsuite: entry
+    - +d/tests/control, +d/tests/build: Add test building against libthai
+  * New upstream version 0.1.27
+  * d/control: Drop unneeded Testsuite field [lintian]
+    - Remove Testsite field
+    - Bump dpkg-dev versioned dep to 1.17.1~, as suggested by lintian
+  * Bump Standards-Version to 4.1.1 (no changes)
+
+ -- Theppitak Karoonboonyanan <thep@debian.org>  Wed, 25 Oct 2017 10:15:01 +0700
+
+libthai (0.1.26-3) unstable; urgency=medium
+
+  * Bump debhelper compat to level 10
+    - d/compat: 9 -> 10
+    - Bump debhelper B-Dep version to 10
+    - Drop dh-autoreconf B-Dep which is already pulled in by debhelper 10
+  * d/rules: Replace $(MAKE) with dh_auto_* to support parallel build
+    except dh_auto_install, as it can't reach install-am target
+  * d/rules: Do not generate/install doc on nodoc DEB_BUILD_OPTIONS
+    (Policy 4.0.0 Section 4.9.1)
+  * d/rules: Pass -a instead of deprecated -s to dh_*
+  * Update d/copyright
+    - Use HTTPS in Format URL
+    - Update years
+  * d/control: Use HTTPS in upstream Homepage
+
+ -- Theppitak Karoonboonyanan <thep@debian.org>  Sat, 29 Jul 2017 17:44:02 +0700
+
+libthai (0.1.26-2) unstable; urgency=medium
+
+  * Fix watch file to use https instead of ftp.
+  * Bump Standards-Version to 4.0.0.
+  * Drop myself from Uploaders.
+
+ -- Loïc Minier <lool@debian.org>  Sun, 09 Jul 2017 22:02:51 +0200
+
 libthai (0.1.26-1pexip1) pexip; urgency=medium
 
   * Migrate to Stretch
@@ -531,8 +615,8 @@ libthai (0.1.7-6) experimental; urgency=low
 libthai (0.1.7-5) experimental; urgency=low
 
   * Backported patch from upstream CVS
-    - Improved word break routine: allow break before white space, fixing 
-      wrong treatment of whitespaces in HTML in mozlibthai component, which 
+    - Improved word break routine: allow break before white space, fixing
+      wrong treatment of whitespaces in HTML in mozlibthai component, which
       caused glitches in webpages.
     - Some more words added to dictionary.
 
@@ -645,32 +729,32 @@ libthai (0.1.5-1ubuntu1) dapper; urgency=low
 
   * initial ubuntu version
   * removed the CVS dirs from the source (repacked it)
-  * debian/control: 
-    - added "libs" to Source section 
+  * debian/control:
+    - added "libs" to Source section
     - changed standard version to 3.6.2.2
-  
+
  -- Michael Vogt <michael.vogt@ubuntu.com>  Tue, 14 Mar 2006 11:49:48 +0000
 
-libthai (0.1.5-1) unstable; urgency=low 
+libthai (0.1.5-1) unstable; urgency=low
 
-  * upstream version 1.5 
+  * upstream version 1.5
 
  -- Pattara Kiatisevi <ott@linux.thai.net>  Tue,  14 Mar 2006 00:54:00 +0700
 
-libthai (0.1.4-1) unstable; urgency=low 
+libthai (0.1.4-1) unstable; urgency=low
 
   * upstream version 1.4 (since 16 October 2004, see the NEWS file)
   * add a check value of array size in th_brk
 
  -- Pattara Kiatisevi <ott@linux.thai.net>  Sun,  12 Dec 2004 15:43:00 +0900
 
-libthai (0.1.3-2) unstable; urgency=low 
+libthai (0.1.3-2) unstable; urgency=low
 
   * set the mode of cttex to firstmode=1 (we want it fast)
 
  -- Pattara Kiatisevi <ott@linux.thai.net>  Sat,  15 May 2004 00:20:00 +0900
 
-libthai (0.1.3-1) unstable; urgency=low 
+libthai (0.1.3-1) unstable; urgency=low
 
   * Define blank base glyph for floating upper/lower vowels rendering.
   * (Minor modified version as required by pango-libthai binding).
