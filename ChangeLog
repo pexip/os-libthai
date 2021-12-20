@@ -1,3 +1,356 @@
+2021-12-21  Theppitak Karoonboonyanan  <theppitak@gmail.com>
+
+	* NEWS:
+	=== Version 0.1.29 ===
+
+2021-12-21  Theppitak Karoonboonyanan  <theppitak@gmail.com>
+
+	Update word break dictionary.
+
+	* data/tdict-city.txt:
+	* data/tdict-collection.txt:
+	* data/tdict-common.txt:
+	* data/tdict-ict.txt:
+	* data/tdict-proper.txt:
+	* data/tdict-science.txt:
+	* data/tdict-slang.txt:
+	  - Add words.
+
+2021-09-18  Theppitak Karoonboonyanan  <theppitak@gmail.com>
+
+	Handle possible malloc failures.
+
+	* src/thbrk/brk-maximal.c (brk_maximal_do_impl, brk_recover_try):
+	  - Handle cases where brk_pool_node_new() possibly returns NULL.
+	    In both places, fail gracefully by behaving as if the dict state
+	    were single there.
+
+	Partially addresses Issue #15.
+
+2021-09-18  Theppitak Karoonboonyanan  <theppitak@gmail.com>
+
+	Fix typo in TIS-620 character name.
+
+	* include/thai/tis.h:
+	  - Fix typo TIS_[S]YMBOL_BAHT, with backward compatibility macro.
+
+2021-08-31  Theppitak Karoonboonyanan  <theppitak@gmail.com>
+
+	Update Doxyfile for doxygen 1.9.1.
+
+	* doc/Doxyfile.in:
+	  - Apply 'doxygen -u'.
+	  - Fix invalid PAPER_TYPE 'a4wide' to 'a4'.
+	* configure.ac:
+	  - Bump doxygen required version.
+
+2021-08-31  Theppitak Karoonboonyanan  <theppitak@gmail.com>
+
+	Apply 'autoupdate' for autoconf 2.71
+
+	* configure.ac:
+	  - Quote m4 strings in AC_INIT() parameters.
+	  - Replace obsolete AC_PROG_LIBTOOL with LT_INIT. With this,
+	    drop AC_LIBTOOL_WIN32_DLL, as we haven't really declared
+	    dllexport anywhere yet.
+	  - Replace obsolete AC_LIBTOOL_LINKER_OPTION() with
+	    _LT_LINKER_OPTION(). Also quote an m4 string.
+	  - Replace obsolete AC_HELP_STRING() with AS_HELP_STRING().
+	  - Replace parameterized AC_OUTPUT() with AC_CONFIG_FILES()
+	    and parameter-less AC_OUTPUT.
+	  - Update AC_PREREQ() from 2.59 to 2.71.
+
+2021-08-19  Theppitak Karoonboonyanan  <theppitak@gmail.com>
+
+	Update word break dictionary.
+
+	* data/tdict-common.txt, data/tdict-spell.txt:
+	  - Move "องคชาติ" from common to spell.
+
+2021-08-19  Theppitak Karoonboonyanan  <theppitak@gmail.com>
+
+	Update word break dictionary.
+
+	* data/tdict-common.txt:
+	* data/tdict-district.txt:
+	* data/tdict-geo.txt:
+	* data/tdict-history.txt:
+	* data/tdict-lang-ethnic.txt:
+	* data/tdict-proper.txt:
+	* data/tdict-science.txt:
+	* data/tdict-slang.txt:
+	* data/tdict-spell.txt:
+	  - Add words.
+
+2021-03-22  Theppitak Karoonboonyanan  <theppitak@gmail.com>
+
+	Prohibit break between Thai/Alpha and Percent
+
+	LB24 of UAX#14 prohibits break between AL and PO,
+	and between PO and AL, without example. But cases like
+	"ten%" can be found in the internet, and similar usage
+	like "สิบ%" sounds sensible in Thai.
+
+	* tests/test_thbrk.c (TestSamples):
+	  - Add test case
+	* src/thbrk/brk-ctype.c (_break_table):
+	  - (THAI, NUM_NBB): _A -> _I
+	  - (ALPHA, NUM_NBB): _A -> _I
+
+2021-03-19  Theppitak Karoonboonyanan  <theppitak@gmail.com>
+
+	Prohibit break between Currency and Alpha
+
+	LB24 of UAX#14 prohibits break between PR and AL,
+	and between AL and PR, without example. But some cases
+	can be found from Wikipedia:
+	  - Brazilian real (usually written as R$)
+	  - Nicaraguan córdoba (usually written as C$)
+	  - Other uses: Micro$oft, George Luca$, etc.
+	https://en.wikipedia.org/wiki/Dollar_sign
+
+	Similar usage is not clear for Thai.
+
+	* tests/test_thbrk.c (TestSamples):
+	  - Add test case, with "C++" to catch side-effect of PR and PR
+	* src/thbrk/brk-ctype.c (_break_table):
+	  - (ALPHA, NUM_CUR): _A -> _I
+	  - (NUM_CUR, ALPHA): _A -> _I
+	  - (NUM_CUR, NUM_CUR): _A -> _I
+
+2021-03-15  Theppitak Karoonboonyanan  <theppitak@gmail.com>
+
+	Prohibit break on the other side of parentesis
+
+	LB30 of UAX#14 prohibits break in "(s)he" and "person(s)".
+	The rule for Thai is more complicated. So, we only cover
+	Latin for now.
+
+	* tests/test_thbrk.c (TestSamples):
+	  - Add test case
+	* src/thbrk/brk-ctype.c (_break_table):
+	  - (ALPHA, NBA): _A -> _I
+	  - (CLOSE, ALPHA): _A -> _I
+
+2021-03-09  Theppitak Karoonboonyanan  <theppitak@gmail.com>
+
+	Prohibit break between Thai/Alpha and number
+
+	LB23 of UAX#14 prohibits break between AL and NU, and between
+	NU and AL. This makes sense for Latin. For Thai, prohibiting
+	break between AL and NU makes sense for codes like "กข43"
+	as a rice strain, but "40บาท" should still be broken.
+
+	* tests/test_thbrk.c (TestSamples):
+	  - Add test case
+	* src/thbrk/brk-ctype.c (_break_table):
+	  - (ALPHA, NUM): _A -> _I
+	  - (NUM, ALPHA): _A -> _I
+	  - (THAI, NUM): _A -> _I
+
+2021-03-05  Theppitak Karoonboonyanan  <theppitak@gmail.com>
+
+	Handle Latin acronyms
+
+	LB29 of UAX#14 prohibits break between IS and AL for acronyms
+	such as "e.g.", but this causes side-effects on other IS
+	punctuations like comma, colon, semicolon as well. This leads
+	to an error in case of ",ก" in Unicode LineBreakTest.txt
+	as tested by Pango, which I think it makes perfect sense
+	to allow break. So, I'm not trying to fix it, but try to
+	extend acronym handling to cover Latin instead.
+
+	* tests/test_thbrk.c (TestSamples):
+	  - Add test case
+	* src/thbrk/thbrk.c (th_brk_find_breaks):
+	  - Rename 'thai_chunk' variable to 'chunk'.
+	  - Move brk_op() lookup to after chunk handling.
+	  - Adjust acronym handling to cover BRK_CLASS_ALPHA acronyms.
+	  - Reset chunk pointers every time break class changes,
+	    not just when entering Thai chunk.
+
+2021-03-01  Theppitak Karoonboonyanan  <theppitak@gmail.com>
+
+	Prohibit some breaks around number sign
+
+	UAX#14 prohibits break within "#ก", which makes sense for
+	hashtags, but its classification as AL would affect cases
+	like "hello|สวัสดี". So, re-classify it as QUOTE instead.
+
+	* tests/test_thbrk.c (TestSamples):
+	  - Add test cases
+	* src/thbrk/brk-ctype.c (_char_class):
+	  - Change class of '#' from BRK_CLASS_ALPHA to BRK_CLASS_QUOTE.
+
+	Partially addresses issue #6.
+
+2021-02-22  Theppitak Karoonboonyanan  <theppitak@gmail.com>
+
+	Prohibit break between right parenthesis and currency
+
+	It's common to write "12๎๎฿" instead of "฿12". So, line break
+	between right parenthesis and currency, such as in "(12)฿",
+	should be prohibited similarly to the left-side form.
+
+	* tests/test_thbrk.c (TestSamples):
+	  - Add test cases
+	* src/thbrk/brk-ctype.h (brk_class_t):
+	  - Add BRK_CLASS_CLOSE to separate ')', ']', '}' from BRK_CLASS_NBB.
+	* src/thbrk/brk-ctype.c (_char_class):
+	  - Change class of ')', ']', '}' from BRK_CLASS_NBB to
+	    BRK_CLASS_CLOSE.
+	* src/thbrk/brk-ctype.c (_break_table):
+	  - Insert row and column for CLOSE, with contents copied from NBB.
+	  - Change (CLOSE, NUM_CUR): _A -> _P
+
+2021-02-19  Theppitak Karoonboonyanan  <theppitak@gmail.com>
+
+	Prohibit break between currency and left parenthesis
+
+	In UAX#14, although LB18 (break after spaces) makes prohibited breaks
+	between PR and {NU,OP} in LB25 equivalent to indirect breaks,
+	the description of PR Property insists that it must be prohibited
+	"even if a space character intervenes", with "$ (100.00)"
+	as an example with no break opportunity. [1] So, we take them as
+	prohibited breaks.
+
+	[1] https://www.unicode.org/reports/tr14/#PR
+
+	* tests/test_thbrk.c (TestSamples):
+	  - Add test case as interpreted from UAX#14
+	* src/thbrk/brk-ctype.c (_break_table):
+	  - (NUM_CUR, NBA): _A -> _P
+
+2021-02-18  Theppitak Karoonboonyanan  <theppitak@gmail.com>
+
+	Prohitbit 2 break cases before percent
+
+	In UAX#14, although LB18 (break after spaces) makes prohibited breaks
+	between {NU,CL,CP} and PO in LB25 equivalent to indirect breaks,
+	the description of PO Property insists that it must be prohibited
+	"even if one or more space characters intervene", with "(12.00) %"
+	as an example with no break opportunity. [1] So, we take them as
+	prohibited breaks.
+
+	[1] https://www.unicode.org/reports/tr14/#PO
+
+	* tests/test_thbrk.c (TestSamples):
+	  - Add test case as interpreted from UAX#14
+	* src/thbrk/brk-ctype.c (_break_table):
+	  - (NUM, NUM_NBB): _I -> _P
+	  - (NBB, NUM_NBB): _A -> _P
+
+2021-02-14  Theppitak Karoonboonyanan  <theppitak@gmail.com>
+
+	Rewrite thbrk test for extensibility.
+
+	* tests/test_thbrk.c:
+	  - Rewrite to read and test from sample list.
+	  - Encode samples in UTF-8 and convert them as required.
+
+2021-02-14  Theppitak Karoonboonyanan  <theppitak@gmail.com>
+
+	Simplify thbrk test.
+
+	* tests/test_thbrk.c:
+	  - Remove interactive mode.
+	  - Continue testing, rather than exit, on failures.
+
+2021-02-05  Theppitak Karoonboonyanan  <theppitak@gmail.com>
+
+	Provide our own version of INSTALL instruction.
+
+	* INSTALL:
+	  - Explain simple installation steps and build requirements.
+	* .gitignore:
+	  - Remove INSTALL ignoring.
+
+	This is to address a frequently found issue when
+	'autoconf-archive' is missing, like in issue #9.
+
+2021-01-28  Theppitak Karoonboonyanan  <theppitak@gmail.com>
+
+	Another protection against invalid array access.
+
+	In addition to commit 8e7ab6967f862a409352f7e8985fd4b445d37f4d.
+
+	* src/thbrk/thbrk.c (th_brk_find_breaks):
+	  - Protect against accessing pos[-1] which may be caused by
+	    a failure in brk_maximal_do().
+
+	Thanks Ratchanan Srirattanamet for the report via personal mail.
+
+2020-08-16  Theppitak Karoonboonyanan  <theppitak@gmail.com>
+
+	Update word break dictionary.
+
+	* data/Makefile.am, +data/tdict-currency.txt:
+	  - Add new category.
+
+	* data/tdict-city.txt:
+	* data/tdict-common.txt:
+	* data/tdict-district.txt:
+	* data/tdict-proper.txt:
+	* data/tdict-science.txt:
+	* data/tdict-slang.txt:
+	* data/tdict-spell.txt:
+	  - Add words.
+
+	* data/tdict-science.txt:
+	  - Fix typo "อัลลอยด์" -> "อัลลอย".
+
+2020-03-23  Ross Burton <ross.burton@intel.com>
+
+	configure.ac: remove duplicate AC_CONFIG_MACRO_DIR
+
+	Autoconf 2.70 will fatally error out if AC_CONFIG_MACRO_DIR is called
+	more than once:
+
+	| configure.ac:25: error: AC_CONFIG_MACRO_DIR can only be used once
+
+	* configure.ac:
+	  - Remove duplicate AC_CONFIG_MACRO_DIR
+
+2020-01-14  Theppitak Karoonboonyanan  <theppitak@gmail.com>
+
+	Update word break dictionary.
+
+	* data/tdict-city.txt:
+	* data/tdict-common.txt:
+	* data/tdict-district.txt:
+	* data/tdict-geo.txt:
+	* data/tdict-history.txt:
+	* data/tdict-ict.txt:
+	* data/tdict-lang-ethnic.txt:
+	* data/tdict-proper.txt:
+	* data/tdict-science.txt:
+	* data/tdict-slang.txt:
+	* data/tdict-spell.txt:
+	  - Add words.
+
+	* data/tdict-proper.txt, data/tdict-city.txt:
+	  - Move "ลิเวอร์พูล" from proper to city.
+	* data/tdict-proper.txt, data/tdict-history.txt:
+	  - Move "เมจิ" from proper to history.
+
+	* data/tdict-common.txt:
+	  - Correct some sorting order.
+
+2019-12-20  Theppitak Karoonboonyanan  <theppitak@gmail.com>
+
+	Use GitHub issue tracker as bug report address.
+
+	* configure.ac:
+	  - Replace bug report e-mail address with GitHub issue tracker URL.
+
+2018-12-17  Theppitak Karoonboonyanan  <theppitak@gmail.com>
+
+	Split compound in dictionary.
+
+	* data/tdict-std.txt:
+	  - Split "ชิงช้าชาลี" into a new entry "ชาลี", as is the case in recent version
+	    of Royal Institute dictionary.
+
 2018-08-01  Theppitak Karoonboonyanan  <theppitak@gmail.com>
 
 	* NEWS:
