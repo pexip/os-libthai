@@ -16,7 +16,7 @@ Standards-Version: 4.3.0
 Vcs-Git: https://salsa.debian.org/debian/libthai.git
 Vcs-Browser: https://salsa.debian.org/debian/libthai
 Homepage: https://linux.thai.net/projects/libthai
-XS-Pexip-Upstream: http://ftp.debian.org/debian/ buster
+XS-Pexip-Upstream: http://deb.debian.org/debian/ bullseye
 
 Package: libthai-dev
 Section: libdevel
