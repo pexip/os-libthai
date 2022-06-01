@@ -1,3 +1,17 @@
+libthai (0.1.28-3) unstable; urgency=medium
+
+  * d/gbp.conf: Use --source-only-changes by default
+  * Bump Standards-Version to 4.4.0 (no changes)
+  * d/rules: Drop '--with autoreconf'
+    Already debhelper default since level 10
+  * d/control: Drop B-Dep on ancient dpkg-dev 1.17.1
+  * d/not-installed: Added to confirm dh_missing on *.la exclusion
+  * Let dh_makeshlibs auto-detect udeb
+    - d/control: B-Dep on debhelper (>= 12.3)
+    - d/rule: Drop '--add-udeb' option from dh_makeshlibs call
+
+ -- Theppitak Karoonboonyanan <thep@debian.org>  Tue, 27 Aug 2019 07:56:02 +0700
+
 libthai (0.1.28-2pexip2) pexip; urgency=medium
 
   * Rebuild in buster environment
