@@ -1,2 +1,3 @@
-version=3
-https://linux.thai.net/pub/thailinux/software/libthai/libthai-([\d+\.]+|\d+)\.tar\.xz debian uupdate
+version=4
+https://linux.thai.net/pub/thailinux/software/libthai/ \
+  libthai@ANY_VERSION@@ARCHIVE_EXT@ debian uupdate

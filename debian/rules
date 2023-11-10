@@ -24,11 +24,9 @@ override_dh_auto_build-arch:
 # No test for data, doc
 override_dh_auto_test-indep:
 
-ifeq ($(filter nocheck,$(DEB_BUILD_OPTIONS)),)
 override_dh_auto_test-arch:
 	dh_auto_build -- -C data
 	dh_auto_test -- -C tests
-endif
 
 override_dh_auto_install-indep:
 	$(MAKE) -C data install DESTDIR=$(CURDIR)/debian/tmp

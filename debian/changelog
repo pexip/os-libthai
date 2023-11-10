@@ -1,3 +1,47 @@
+libthai (0.1.29-1) unstable; urgency=medium
+
+  * New upstream version 0.1.29
+  * Drop patch cherry-picked from upstream
+    - d/p/0001-configure.ac-remove-duplicate-AC_CONFIG_MACRO_DIR.patch
+  * d/copyright: Update year for upstream
+  * Declare compliance with Debian Policy 4.6.0 (no changes)
+  * Drop obsolete libthai-dev.maintscript.
+    Not needed since upgrades from oldoldstable (stretch).
+  * Add upstream metadata
+  * Trim trailing whitespace.
+
+ -- Theppitak Karoonboonyanan <thep@debian.org>  Tue, 21 Dec 2021 03:24:12 +0700
+
+libthai (0.1.28-4.1) unstable; urgency=high
+
+  * Non-maintainer upload.
+  * d/p/0001-configure.ac-remove-duplicate-AC_CONFIG_MACRO_DIR.patch:
+    Add upstream patch to fix FTBFS against autoconf 2.70+.
+    (Closes: #978858)
+
+ -- Boyuan Yang <byang@debian.org>  Fri, 27 Aug 2021 16:08:50 -0400
+
+libthai (0.1.28-4) unstable; urgency=medium
+
+  [ Theppitak Karoonboonyanan ]
+  * d/watch: Update to version 4
+  * d/gbp.conf: Remove the 'buildpackage' section.
+    This should be for per-user options.
+  * Switch to debhelper-compat 13
+    - Also remove versioned debhelper B-Dep
+  * d/rules: Remove nocheck-guard on dh_auto_test-arch
+  * Declare compliance with Debian Policy 4.5.1 (no changes)
+  * d/copyright: Use HTTPS in Source field
+
+  [ Sebastien Bacher ]
+  * debian/tests/build:
+    - Make autopkgtests cross-test-friendly. (Closes: #983522)
+
+  [ Theppitak Karoonboonyanan ]
+  * d/copyright: Update years on packaging
+
+ -- Theppitak Karoonboonyanan <thep@debian.org>  Wed, 03 Mar 2021 16:35:57 +0700
+
 libthai (0.1.28-3pexip3) pexip-bullseye; urgency=medium
 
   * Bullseye rebuild for ARM64 inclusion
@@ -820,4 +864,3 @@ libthai (0.1.1-1) unstable; urgency=low
   * Initial Release.
 
  -- Pattara Kiatisevi <ott@linux.thai.net>  Sun,  2 Feb 2003 16:37:08 +0900
-
