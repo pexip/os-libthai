@@ -1,3 +1,14 @@
+libthai (0.1.29-2) unstable; urgency=medium
+
+  * Switch from pkg-config to pkgconf
+    - B-Dep on pkgconf
+    - libthai-dev: Dep on pkgconf
+    - d/tests/control: Dep on pkgconf for build test
+  * d/copyright: Update packaging years
+  * Declare compliance with Debian Policy 4.6.2 (no changes)
+
+ -- Theppitak Karoonboonyanan <thep@debian.org>  Fri, 05 Jan 2024 09:23:41 +0700
+
 libthai (0.1.29-1+pexip24u3) pexip-bookworm; urgency=medium
 
   * New versioning scheme
